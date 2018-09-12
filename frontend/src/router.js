@@ -9,8 +9,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'exampleModule',
-      component: () => import('@/modules/exampleModule/ExampleModule')
+      name: 'daysOfRum',
+      component: () => import('@/modules/daysOfRum/DaysOfRum')
     }
   ]
 })
