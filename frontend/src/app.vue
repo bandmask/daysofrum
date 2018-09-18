@@ -7,16 +7,47 @@
     <Footer />
     <pre class="debugger">
   debugger
-  Device: {{this.$mq}}
+  Device: {{this.orientation}}
     </pre>
   </div>
 </template>
 
 <script>
+import { breakpoints } from '@/media'
 import Footer from '@/modules/footer/Footer'
 
 export default {
-  components: { Footer }
+  components: { Footer },
+  mounted () {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.handleResize)
+    })
+  },
+  created () {
+    this.handleResize()
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.handleResize)
+  },
+  computed: {
+    orientation: {
+      get () {
+        return this.$store.state.orientation
+      },
+      set (val) {
+        this.$store.commit('orientation', val)
+      }
+    }
+  },
+  methods: {
+    handleResize () {
+      Object.keys(breakpoints).forEach(key => {
+        if (window.matchMedia(breakpoints[key]).matches) {
+          this.orientation = key
+        }
+      })
+    }
+  }
 }
 </script>
 
@@ -30,7 +61,6 @@ body {
     color: #2c3e50;
 
     height: 100%;
-    width: 50%;
     margin: 0px auto;
 
     #nav {

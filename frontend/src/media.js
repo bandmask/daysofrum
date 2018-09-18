@@ -1,8 +1,5 @@
-export default {
-  breakpoints: {
-    phone: 560,
-    tablet: 1000,
-    portrait: 1400,
-    desktop: Infinity
-  }
+export const breakpoints = {
+  portrait: 'all and (orientation: portrait)',
+  landscape: '(max-width: 1400px) and (orientation: landscape)',
+  desktop: '(min-width: 1400px) and (orientation: landscape)'
 }
