@@ -5,14 +5,11 @@
     </div>
     <router-view class="component-content" />
     <Footer />
-    <pre class="debugger">
-  debugger
-  Device: {{this.orientation}}
-    </pre>
   </div>
 </template>
 
 <script>
+import { MUTATIONS } from '@/store'
 import { breakpoints } from '@/media'
 import Footer from '@/modules/footer/Footer'
 
@@ -21,6 +18,7 @@ export default {
   mounted () {
     this.$nextTick(() => {
       window.addEventListener('resize', this.handleResize)
+      window.addEventListener('scroll', this.handleScroll)
     })
   },
   created () {
@@ -28,6 +26,7 @@ export default {
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('scroll', this.handleScroll)
   },
   computed: {
     orientation: {
@@ -35,7 +34,15 @@ export default {
         return this.$store.state.orientation
       },
       set (val) {
-        this.$store.commit('orientation', val)
+        this.$store.commit(MUTATIONS.ORIENTATION, val)
+      }
+    },
+    scroll: {
+      get () {
+        return this.$store.state.scroll
+      },
+      set (val) {
+        this.$store.commit(MUTATIONS.SCROLL, val)
       }
     }
   },
@@ -46,6 +53,9 @@ export default {
           this.orientation = key
         }
       })
+    },
+    handleScroll (event) {
+      this.scroll = window.scrollY
     }
   }
 }
@@ -53,14 +63,18 @@ export default {
 
 <style lang="less">
 body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
   margin: 0;
+  overflow: hidden scroll;
+
   #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-
-    height: 100%;
     margin: 0px auto;
 
     #nav {
@@ -96,7 +110,7 @@ body {
 
     .debugger {
       position: absolute;
-      top: 0;
+      bottom: 0;
       right: 0;
       width: 25%;
       height: 240px;

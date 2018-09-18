@@ -31,5 +31,20 @@ export function build () {
       rating: 9000,
       note: 'lorem ipsum'
     }]
+  }, {
+    year: 2018,
+    isActive: true,
+    rums: [{
+      day: 1,
+      name: 'test',
+      rating: 9000,
+      note: 'lorem ipsum',
+      imageSrc: image1
+    }, {
+      day: 2,
+      name: 'test',
+      rating: 9000,
+      note: 'lorem ipsum'
+    }]
   }]
 }
