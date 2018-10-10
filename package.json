@@ -6,9 +6,9 @@
   "license": "MIT",
   "scripts": {
     "docker:build": "docker build -t bandmask/web .",
-    "docker:run": "docker run -p 80:49160 -d bandmask/web",
+    "docker:run": "docker run -p 80:49260 -d bandmask/web",
     "pipe:arm": "cd ./frontend && yarn build && cd ../ && yarn docker:arm",
-    "docker:arm": "docker build -t bandmask/web:arm . && docker push bandmask/web:arm"
+    "docker:arm": "docker build -t bandmask/daysofrum:arm . && docker push bandmask/daysofrum:arm"
   },
   "dependencies": {
     "vue-mq": "^0.2.1"
