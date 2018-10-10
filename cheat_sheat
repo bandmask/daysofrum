@@ -12,3 +12,6 @@ all commands:
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 docker rmi $(docker images -a -q)
+
+prop:
+docker run -d --name daysofrum -p 88:49260 --restart always bandmask/daysofrum:arm
