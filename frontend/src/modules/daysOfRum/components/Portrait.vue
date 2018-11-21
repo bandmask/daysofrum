@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import portraitBanner from '@/assets/portrait_banner.jpg'
+import portraitBanner from '@/assets/portrait_banner_2.jpg'
 
 export default {
   props: ['model'],

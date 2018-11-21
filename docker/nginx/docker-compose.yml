@@ -1,0 +1,27 @@
+version: 3
+
+services:
+  nginx-proxy:
+    image: arm32v6/nginx
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  web:
+    image: bandmask/web:arm
+    container_name: web
+    depends_on: nginx-proxy
+    expose: 49160
+
+  daysofrum:
+    image: bandmask:daysofrum:arm
+    container_name: daysofrum
+    depends_on: nginx-proxy
+    expose: 49260
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
