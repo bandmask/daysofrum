@@ -2,12 +2,16 @@ version: 3
 
 services:
   nginx-proxy:
-    image: arm32v6/nginx
-    container_name: nginx-proxy
+    image: arm32v6/nginx:stable-alpine-perl
+    container_name: nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /var/nginx/conf:/etc/nginx:ro
+      - /etc/letsencrypt/live/ropr.se/fullchain.pem:/etc/ssl/fullchain.pem
+      - /etc/letsencrypt/live/ropr.se/privkey.pem:/etc/ssl/privkey.pem
 
   web:
     image: bandmask/web:arm
@@ -16,7 +20,7 @@ services:
     expose: 49160
 
   daysofrum:
-    image: bandmask:daysofrum:arm
+    image: bandmask/daysofrum:arm
     container_name: daysofrum
     depends_on: nginx-proxy
     expose: 49260
