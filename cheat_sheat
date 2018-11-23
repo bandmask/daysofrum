@@ -28,6 +28,12 @@ Fungerande uppsättning:
           --network="nginx-proxy" \
           -e VIRTUAL_HOST=ropr.se \
           bandmask/web:arm
+
+  registry
+    docker run -d \
+          --restart=always \
+          --name registry \
+          -v
   nginx:
     docker run -d \
           -p 443:443 \
