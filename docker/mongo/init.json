@@ -1,0 +1,14 @@
+[
+  {
+    "year": 2017,
+    "description": "some year description",
+    "rums": [
+      {
+        "day": 1,
+        "rum": "some rum",
+        "rating": 1,
+        "note": "some note"
+      }
+    ]
+  }
+]

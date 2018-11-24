@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:1.15.6-alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+      - /var/nginx/conf:/etc/nginx:ro
+      - /etc/letsencrypt/live/ropr.se/fullchain.pem:/etc/ssl/fullchain.pem
+      - /etc/letsencrypt/live/ropr.se/privkey.pem:/etc/ssl/privkey.pem
+    depends_on:
+      - web
+      - daysofrum
+
+  web:
+    image: bandmask/web:amd64
+    container_name: web
+    expose:
+      - "49160"
+    environment:
+      - VIRTUAL_HOST=ropr.se
+
+  daysofrum:
+    image: bandmask/daysofrum:amd64
+    container_name: daysofrum
+    expose:
+      - "49260"
+    environment:
+      - VIRTUAL_HOST=daysofrum.ropr.se
+    depends_on:
+      - mongodb_seed
+    links:
+      - mongodb
+
+  mongodb:
+    image: amd64/mongo
+    ports:
+      - "27017:27017"
+    container_name: mongodb
+    volumes:
+      - /var/app/data:/data/db
+
+  mongodb_seed:
+    build: ./mongo-seed
+    links:
+      - mongodb
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
