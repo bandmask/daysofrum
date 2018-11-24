@@ -59,6 +59,7 @@ certbot:
 
 
 nginx.conf:
+# location: /var/nginx/conf
 events { }
 
 error_log /var/log/nginx/error.log warn;
