@@ -20,14 +20,14 @@ Fungerande uppsättning:
           --expose 49260 \
           --network="nginx-proxy" \
           -e VIRTUAL_HOST=daysofrum.ropr.se \
-          bandmask/daysofrum:arm
+          bandmask/daysofrum:amd64
   web:
     docker run -d \
           --name web \
           --expose 49160 \
           --network="nginx-proxy" \
           -e VIRTUAL_HOST=ropr.se \
-          bandmask/web:arm
+          bandmask/web:amd64
 
   registry
     docker run -d \
@@ -44,7 +44,7 @@ Fungerande uppsättning:
           -v /var/nginx/conf:/etc/nginx:ro \
           -v /etc/letsencrypt/live/ropr.se/fullchain.pem:/etc/ssl/fullchain.pem \
           -v /etc/letsencrypt/live/ropr.se/privkey.pem:/etc/ssl/privkey.pem \
-          -P arm32v6/nginx:stable-alpine-perl
+          -P nginx:1.15.6-alpine
 
 
 certbot:

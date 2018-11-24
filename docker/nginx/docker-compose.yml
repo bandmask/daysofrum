@@ -2,7 +2,7 @@ version: 3
 
 services:
   nginx-proxy:
-    image: arm32v6/nginx:stable-alpine-perl
+    image: nginx:1.15.6-alpine
     container_name: nginx
     ports:
       - "80:80"
@@ -14,13 +14,13 @@ services:
       - /etc/letsencrypt/live/ropr.se/privkey.pem:/etc/ssl/privkey.pem
 
   web:
-    image: bandmask/web:arm
+    image: mhart/alpine:node
     container_name: web
     depends_on: nginx-proxy
     expose: 49160
 
   daysofrum:
-    image: bandmask/daysofrum:arm
+    image: mhart/alpine:node
     container_name: daysofrum
     depends_on: nginx-proxy
     expose: 49260

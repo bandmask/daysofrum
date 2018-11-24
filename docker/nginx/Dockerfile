@@ -1,4 +1,4 @@
-FROM arm32v6/nginx:stable-alpine-perl
+FROM nginx:1.15.6-alpine
 
 COPY conf /etc/nginx
 
