@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  daysofrum:
+    image: temp/express:new
+    container_name: daysofrum
+    ports:
+      - "8080:49260"
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+
+  mongodb:
+    image: amd64/mongo
+    ports:
+      - "27017:27017"
+    container_name: mongodb
+
+  mongodb_seed:
+    build: ./mongo-seed
+    links:
+      - mongodb

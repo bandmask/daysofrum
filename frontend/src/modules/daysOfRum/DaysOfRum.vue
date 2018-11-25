@@ -1,21 +1,16 @@
 <template>
-  <component :is="vm.getContainer()" :model="vm.model" />
+  <component :is="vm.getContainer()" />
 </template>
 
 <script>
-import { build } from './modelBuilder'
+import { ACTIONS } from '@/store/actions'
 import Landscape from './components/Landscape'
 import Portrait from './components/Portrait'
 
 export default {
   components: { Landscape, Portrait },
-  data () {
-    return {
-      model: {}
-    }
-  },
   created () {
-    this.model = build()
+    this.$store.dispatch(ACTIONS.GET_YEARS)
   },
   computed: {
     vm () {

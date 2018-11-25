@@ -3,29 +3,30 @@
     <div class="header" :style="{ backgroundImage: `url(${vm.bannerImageSrc}`}">
       <h1>24 Days Of Rum</h1>
       <div class="year-filter">
-        <div v-for="year in years"
-             :key="year"
-             @click="vm.activeYear = year"
-             :class="{'active': vm.activeYear === year}"
+        <div v-for="(year, $index) in years"
+             :key="$index"
+              @click="vm.setActiveYear(year)"
+             :class="{'active': vm.activeYear.year === year.year}"
              class="filter">
-          {{year}}
+          {{year.year}}
         </div>
       </div>
     </div>
     <div class="content">
-      <div v-for="collection in model"
-           :key="collection.year"
-           v-if="vm.activeYear === collection.year"
-           class="collection">
-        <h1>{{collection.year}}</h1>
+      <div v-if="vm.activeYear" class="year-header">
+        <h1>{{vm.activeYear.year}}</h1>
+        <div v-if="vm.activeYear.description" class="year-description">"{{vm.activeYear.description}}"</div>
         <hr class="main-divider" />
-        <div v-for="rum in collection.rums"
-             :key="rum.day"
-             class="rum">
+      </div>
+      <div v-if="vm.ratings.length > 0"
+           class="rums">
+        <div v-for="(rum, $index) in vm.ratings"
+            :key="$index"
+            class="rum">
           <div v-if="rum.imageSrc"
-               class="image">
+                class="image">
             <img :src="rum.imageSrc"
-                 :alt="rum.name" />
+                  :alt="rum.name" />
           </div>
           <div class="details">
             <label>
@@ -50,31 +51,24 @@
           </div>
         </div>
       </div>
+      <div v-else
+           class="no-rums-message">
+        <div>It seems that there are no tasting sessions for {{vm.activeYear.year}}.</div>
+        <div>Check in again later, something might come up soon.</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import portraitBanner from '@/assets/portrait_banner_2.jpg'
+import { ACTIONS } from '@/store/actions'
 
 export default {
-  props: ['model'],
-  data: _ => ({
-    bannerImageSrc: portraitBanner,
-    years: [],
-    activeYear: 0
-  }),
-  mounted () {
-    window.addEventListener('scroll', this.handleScroll)
-    this.years = this.model
-      .map(collection => collection.year)
-      .sort((x, y) => {
-        return x < y
-      })
-    this.activeYear = this.years[0]
-  },
-  beforeDestroy () {
-    window.removeEventListener('scroll', this.handleScroll)
+  data () {
+    return {
+      bannerImageSrc: portraitBanner
+    }
   },
   computed: {
     vm () {
@@ -85,9 +79,29 @@ export default {
     },
     scroll () {
       return this.$store.state.scroll
+    },
+    model () {
+      return this.$store.state.model
+    },
+    years () {
+      return this.$store.state.years
+    },
+    activeYear: {
+      get () {
+        return this.$store.state.activeYear
+      },
+      set (value) {
+        this.$store.dispatch(ACTIONS.SET_ACTIVE_YEAR, value)
+      }
+    },
+    ratings () {
+      return this.model.filter(rating => rating.year === this.activeYear.year)
     }
   },
   methods: {
+    setActiveYear (year) {
+      this.activeYear = year
+    }
   }
 }
 </script>
@@ -131,7 +145,15 @@ export default {
       z-index: 10;
       border-radius: 1.5px;
 
-      .collection {
+      .year-header {
+        .year-description {
+          font-style: italic;
+          color: gray;
+          margin-bottom: 3px;
+        }
+      }
+
+      .rums {
         .rum {
           display: flex;
           align-items: flex-start;
@@ -173,6 +195,13 @@ export default {
           }
         }
       }
+
+      .no-rums-message {
+        padding: 10px;
+        font-style: italic;
+        color: gray;
+      }
+
       hr {
         margin: 0px;
         border: none;
@@ -186,6 +215,7 @@ export default {
           height: 2px;
         }
       }
+
       &:after,
       &:before {
         display: block;
@@ -206,6 +236,7 @@ export default {
         box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.3);
       }
     }
+
     .year-filter {
       position: absolute;
       bottom: 20px;

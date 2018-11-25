@@ -1,46 +1,54 @@
-var http = require("http");
-var url = require("url");
-var path = require("path");
-var fs = require("fs");
-var port = process.argv[2] || 49260;
+const express = require('express');
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-http.createServer(function (request, response) {
+const port = 49260;
+const dbUri = "mongodb://mongodb";
+const app = express();
 
-  var uri = url.parse(request.url).pathname,
-    filename = path.join(process.cwd(), uri);
+MongoClient.connect(dbUri, (err, client) => {
+  if (err) throw 'Error connecting to db ' + err;
 
-  var contentTypesByExtension = {
-    '.html': "text/html",
-    '.css': "text/css",
-    '.js': "text/javascript"
-  };
+  var db = client.db('daysofrum')
+  console.log('connected to db' + db);
 
-  fs.exists(filename, function (exists) {
-    if (!exists) {
-      response.writeHead(404, { "Content-Type": "text/plain" });
-      response.write("404 Not Found\n");
-      response.end();
-      return;
-    }
+  app.use(express.static(__dirname));
 
-    if (fs.statSync(filename).isDirectory()) filename += '/index.html';
+  app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
-    fs.readFile(filename, "binary", function (err, file) {
-      if (err) {
-        response.writeHead(500, { "Content-Type": "text/plain" });
-        response.write(err + "\n");
-        response.end();
-        return;
-      }
+  app.listen(port, () => {
+    console.log('listeneing on port ' + port);
+  });
 
-      var headers = {};
-      var contentType = contentTypesByExtension[path.extname(filename)];
-      if (contentType) headers["Content-Type"] = contentType;
-      response.writeHead(200, headers);
-      response.write(file, "binary");
-      response.end();
+  app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+  });
+
+  app.get('/api/years', (req, res) => {
+    console.log('request for /api/year');
+
+    db.collection('years').find().toArray((err, result) => {
+      if (err) return console.log('error fetching years');
+
+      res.json(result);
     });
   });
-}).listen(parseInt(port, 10));
 
-console.log(`Static file server running at \n => http://localhost:${port} \nCTRL + C to shutdown`);
+  app.get('/api/ratings', (req, res) => {
+    let year = parseInt(req.query.year);
+
+    console.log('request for /api/ratings with ' + year);
+
+    db.collection('ratings').find({ year: year }).toArray((err, result) => {
+      if (err) return console.log('error fetching ratings for ' + year);
+
+      console.log('found raings for year', year, result);
+
+      res.json(result);
+    })
+  });
+});

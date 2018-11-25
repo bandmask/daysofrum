@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { MUTATIONS } from '@/store'
+import { MUTATIONS } from '@/store/mutations'
 import { breakpoints } from '@/media'
 import Footer from '@/modules/footer/Footer'
 
