@@ -52,7 +52,7 @@ certbot:
     sudo certbot certonly --standalone -d ropr.se -d www.ropr.se -d daysofrum.ropr.se -d
 
   expand:
-    sudo certbot certonly --standalone -d ropr.se -d www.ropr.se -d daysofrum.ropr.se -d [newdomain].ropr.se –expand
+    sudo certbot certonly --standalone --cert-name ropr.se -d ropr.se -d www.ropr.se -d daysofrum.ropr.se -d auth.ropr.se -d registry.ropr.se
 
   renew:
     sudo certbot renew --dry-run --pre-hook "sudo docker stop nginx" --post-hook "sudo docker start nginx"
