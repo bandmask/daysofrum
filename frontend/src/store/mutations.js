@@ -1,9 +1,9 @@
-import orientation from './mutations/orientation'
-import scroll from './mutations/scroll'
-import setData from './mutations/setData'
-import setYears from './mutations/setYears'
-import setRatings from './mutations/setRatings'
-import setActiveYear from './mutations/setActiveYear'
+import orientation from '@/store/mutations/orientation'
+import scroll from '@/store/mutations/scroll'
+import setData from '@/store/mutations/setData'
+import setYears from '@/store/mutations/setYears'
+import setRatings from '@/store/mutations/setRatings'
+import setActiveYear from '@/store/mutations/setActiveYear'
 
 export const MUTATIONS = {
   ORIENTATION: 'm_orientation',

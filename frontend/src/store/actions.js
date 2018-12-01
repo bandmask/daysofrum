@@ -1,10 +1,10 @@
-import getYears from './actions/getYears'
-import getRatings from './actions/getRatings'
-import setActiveYear from './actions/setActiveYear'
+import getYears from '@/store/actions/getYears'
+import getRatings from '@/store/actions/getRatings'
+import setActiveYear from '@/store/actions/setActiveYear'
 
 export const ACTIONS = {
-  GET_YEARS: 'a_loadYears',
-  GET_RATINGS: 'a_loadRatings',
+  GET_YEARS: 'a_getYears',
+  GET_RATINGS: 'a_getRatings',
   SET_ACTIVE_YEAR: 'a_setActiveYear'
 }
 
