@@ -1,16 +1,26 @@
-FROM mhart/alpine-node:11.2.0
+FROM mhart/alpine-node:11.2.0 AS base
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 RUN apk add --no-cache yarn
 
-COPY server/package.json ./
-COPY server/yarn.lock ./
-COPY server/server.js ./
+# front end build
+FROM base AS front-build
 
-RUN yarn install
+COPY frontend/ ./
 
-ADD frontend/dist ./
+RUN ["yarn", "install"]
+RUN ["yarn", "run", "build"]
+
+# server build
+FROM base AS server-build
+
+COPY server/ ./
+
+RUN ["yarn", "install"]
+RUN ["yarn", "run", "build"]
+
+COPY --from=front-build /app/dist ./dist
 
 EXPOSE 49260
-CMD ["yarn", "start"]
+ENTRYPOINT ["yarn", "run", "start"]

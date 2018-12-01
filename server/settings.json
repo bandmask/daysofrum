@@ -1,0 +1,11 @@
+{
+  "jwtSignerSettings": {
+    "issuer": "ropr.se",
+    "audience": "daysofrum",
+    "secret": "MTE0NEQzMThDOEI4RDVBM0E3OUJBNEIxQTI3QzM="
+  },
+  "databaseSettings": {
+    "mongoDbConnection": "mongodb://localhost/",
+    "mongoDbName": "daysofrum"
+  }
+}
