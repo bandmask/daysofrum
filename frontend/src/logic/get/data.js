@@ -1,4 +1,4 @@
-// const apiUri = 'http://localhost:8080/api'
+// const apiUri = 'http://localhost:49260/api'
 const apiUri = 'https://daysofrum.ropr.se/api'
 
 const getData = () => {
@@ -11,7 +11,7 @@ const getData = () => {
     }
   })
     .then(resp => resp.json())
-    .then(data => data)
+    .then(data => data.result)
     .catch(ex => {
       console.log('%cfetch error: ', 'color: red', ex)
     })
@@ -27,14 +27,14 @@ const getYears = () => {
     }
   })
     .then(resp => resp.json())
-    .then(data => data)
+    .then(data => data.result)
     .catch(ex => {
       console.log('%cfetch error: ', 'color: red', ex)
     })
 }
 
 const getRatings = year => {
-  let uri = `${apiUri}/ratings?year=${year}`
+  let uri = `${apiUri}/ratings/${year}`
 
   return fetch(uri, {
     method: 'GET',
@@ -43,7 +43,7 @@ const getRatings = year => {
     }
   })
     .then(resp => resp.json())
-    .then(data => data)
+    .then(data => data.result)
     .catch(ex => {
       console.log('%cfetch error: ', 'color: red', ex)
     })

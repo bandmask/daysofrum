@@ -2,6 +2,7 @@ import express from 'express'
 
 import yearsController from 'controllers/years'
 import ratingsController from 'controllers/ratings'
+import imageController from 'controllers/images'
 
 const port = 49260
 
@@ -25,6 +26,7 @@ const init = () => {
 
   app.use('/api/years', yearsController)
   app.use('/api/ratings', ratingsController)
+  app.use('/api/images', imageController)
 }
 
 export default {

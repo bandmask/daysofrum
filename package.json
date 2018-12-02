@@ -5,9 +5,7 @@
   "author": "Niklas Johansson <admin@ropr.com>",
   "license": "MIT",
   "scripts": {
-    "docker:build": "docker build -t bandmask/web .",
-    "docker:run": "docker run -p 80:49260 -d bandmask/web",
-    "pipe:amd64": "cd ./frontend && yarn build && cd ../ && yarn docker:amd64",
     "docker:amd64": "docker build -t bandmask/daysofrum:amd64 . && docker push bandmask/daysofrum:amd64"
-  }
+  },
+  "dependencies": {}
 }

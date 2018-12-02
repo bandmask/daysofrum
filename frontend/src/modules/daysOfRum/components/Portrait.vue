@@ -20,33 +20,33 @@
       </div>
       <div v-if="vm.ratings.length > 0"
            class="rums">
-        <div v-for="(rum, $index) in vm.ratings"
+        <div v-for="(rating, $index) in vm.ratings"
             :key="$index"
             class="rum">
-          <div v-if="rum.imageSrc"
+          <div v-if="rating.image"
                 class="image">
-            <img :src="rum.imageSrc"
-                  :alt="rum.name" />
+            <img :src="vm.getImage(rating.image)"
+                  :alt="rating.name" />
           </div>
           <div class="details">
             <label>
               Day:
-              <span>{{rum.day}}</span>
+              <span>{{rating.day}}</span>
             </label>
             <label>
               Name:
-              <span>{{rum.name}}</span>
+              <span>{{rating.name}}</span>
             </label>
             <label>
               Rating:
-              <span>{{rum.rating}}</span>
+              <span>{{rating.rating}}</span>
             </label>
-          </div>
-          <div class="note">
             <label>
               Note:
-              <span>{{rum.note}}</span>
+              <span>{{rating.note}}</span>
             </label>
+          </div>
+          <div class="divider">
             <hr class="collection-divider" />
           </div>
         </div>
@@ -61,8 +61,9 @@
 </template>
 
 <script>
-import portraitBanner from '@/assets/portrait_banner_2.jpg'
 import { ACTIONS } from '@/store/actions'
+
+import portraitBanner from '@/assets/portrait_banner_2.jpg'
 
 export default {
   data () {
@@ -101,6 +102,9 @@ export default {
   methods: {
     setActiveYear (year) {
       this.activeYear = year
+    },
+    getImage (image) {
+      return `data:image/jpeg;base64, ${image}`
     }
   }
 }
@@ -166,8 +170,6 @@ export default {
             display: inline-flex;
 
             img {
-              width: 210px;
-              height: 200px;
               margin-bottom: 20px;
             }
           }
@@ -177,7 +179,7 @@ export default {
             flex-direction: column;
           }
 
-          .note {
+          .divider {
             display: flex;
             flex-flow: column wrap;
             flex: 2 0 100%;

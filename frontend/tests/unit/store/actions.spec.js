@@ -1,6 +1,7 @@
 import getYears from '@/store/actions/getYears'
 import getRatings from '@/store/actions/getRatings'
 import setActiveYear from '@/store/actions/setActiveYear'
+import uploadFile from '@/store/actions/uploadFile'
 
 import { default as actions, ACTIONS } from '@/store/actions'
 
@@ -41,8 +42,20 @@ describe('actions', () => {
       expect(actions[ACTIONS.SET_ACTIVE_YEAR]).toEqual(setActiveYear)
     })
   })
+
+  describe('uploadFile', () => {
+    it('should be defined by action string', () => {
+      expect(ACTIONS.UPLOAD_FILE).toBeDefined()
+      expect(ACTIONS.UPLOAD_FILE).toEqual('a_uploadFile')
+    })
+
+    it('should be a resolvable action', () => {
+      expect(actions[ACTIONS.UPLOAD_FILE]).toEqual(uploadFile)
+    })
+  })
 })
 
 jest.mock('@/store/actions/getYears', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/actions/getRatings', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/actions/setActiveYear', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/actions/uploadFile', () => jest.fn().mockImplementation(() => ({})))

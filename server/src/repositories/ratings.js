@@ -23,7 +23,7 @@ const insertOrUpdate = (ratingsModel) => {
     {
       $set: {
         name: ratingsModel.name,
-        origint: ratingsModel.origint,
+        origin: ratingsModel.origin,
         rating: ratingsModel.rating,
         note: ratingsModel.note,
         percentage: ratingsModel.percentage
