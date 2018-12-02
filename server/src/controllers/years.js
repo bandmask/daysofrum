@@ -1,35 +1,30 @@
 import express from 'express'
-import dbUtil from 'utils/db'
 
-import yearRepository from 'repositories/year'
-
+import yearRepository from 'repositories/years'
 import jwtMiddleWare from 'utils/jwtMiddleWare'
-import yearValidator from 'validators/year'
+import yearValidator from 'validators/years'
 
 const router = express.Router()
-
 router.use(express.json())
 
-router.get('/', (req, res) => {
-  yearRepository.getAll(dbUtil.getDb(), (error, result) => {
-    if (error) {
-      res.json({ statusCode: 400, message: error })
-      return
-    }
+router.get('/', async (req, res) => {
+  try {
+    let result = await yearRepository.getAll()
     res.json({ statusCode: 200, result: result })
-  })
+  } catch (exception) {
+    res.json({ statusCode: 400, message: exception })
+  }
 })
 
-router.post('/', jwtMiddleWare, (req, res) => {
+router.post('/', jwtMiddleWare, async (req, res) => {
   let year = req.body
-  if (yearValidator(year)) {
-    yearRepository.insertOrUpdate(dbUtil.getDb(), year, (error, result) => {
-      if (error) {
-        res.json({ statusCode: 400, message: error })
-        return
-      }
+  if (yearValidator.validate(year)) {
+    try {
+      let result = await yearRepository.insertOrUpdate(year)
       res.json({ statusCode: 200, result: result })
-    })
+    } catch (exception) {
+      res.json({ statusCode: 400, message: error })
+    }
   } else {
     res.json({ success: 400, message: 'incorrect model' })
   }
