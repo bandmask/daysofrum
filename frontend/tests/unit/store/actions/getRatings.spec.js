@@ -5,24 +5,18 @@ import { MUTATIONS } from '@/store/mutations'
 import getDataService from '@/logic/get/data'
 
 describe('getRatings', () => {
-  let context = {
-    commit: (type, payload) => { }
-  }
   let payload = 2018
 
-  let commitSpy
-
-  beforeAll(() => {
-    commitSpy = jest.spyOn(context, 'commit')
-  })
+  let context = {
+    commit: jest.fn()
+  }
 
   beforeEach(async () => {
     await action(context, payload)
   })
 
   afterEach(() => {
-    commitSpy.mockClear()
-
+    context.commit.mockClear()
     getDataService.getRatings.mockClear()
   })
 
@@ -32,27 +26,11 @@ describe('getRatings', () => {
   })
 
   it('should call getDataService getRatings', () => {
-    let calls = getDataService.getRatings.mock.calls
-    expect(calls.length).toBe(1)
-
-    let args = calls[0]
-    expect(args.length).toBe(1)
-
-    let year = args[0]
-    expect(year).toEqual(payload)
+    expect(getDataService.getRatings).toHaveBeenCalledWith(payload)
   })
 
   it('should call commit with mutation SET_RATING and data', () => {
-    let calls = commitSpy.mock.calls
-    expect(calls.length).toBe(1)
-
-    let args = calls[0]
-    expect(args.length).toBe(2)
-
-    let mutation = args[0]
-    let data = args[1]
-    expect(mutation).toBe(MUTATIONS.SET_RATINGS)
-    expect(data).toEqual({ year: payload, ratings: { some: 'data' } })
+    expect(context.commit).toHaveBeenCalledWith(MUTATIONS.SET_RATINGS, { year: payload, ratings: { some: 'data' } })
   })
 })
 

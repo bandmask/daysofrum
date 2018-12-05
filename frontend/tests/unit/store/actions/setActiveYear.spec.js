@@ -4,25 +4,17 @@ import { ACTIONS } from '@/store/actions'
 import { MUTATIONS } from '@/store/mutations'
 
 describe('setActiveYear', () => {
-  let context = {
-    state: {},
-    commit: (type, payload) => { },
-    dispatch: (type, payload) => { }
-  }
-
   let payload
 
-  let commitSpy
-  let dispatchSpy
-
-  beforeAll(() => {
-    commitSpy = jest.spyOn(context, 'commit')
-    dispatchSpy = jest.spyOn(context, 'dispatch')
-  })
+  let context = {
+    state: {},
+    commit: jest.fn(),
+    dispatch: jest.fn()
+  }
 
   afterEach(() => {
-    commitSpy.mockClear()
-    dispatchSpy.mockClear()
+    context.commit.mockClear()
+    context.dispatch.mockClear()
   })
 
   afterAll(() => {
@@ -31,9 +23,11 @@ describe('setActiveYear', () => {
   })
 
   describe('when changing year', () => {
+    let _context
     beforeEach(async () => {
       payload = 2018
-      let _context = Object.assign({}, context, {
+
+      _context = Object.assign({}, context, {
         state: {
           activeYear: 2017,
           model: []
@@ -44,23 +38,16 @@ describe('setActiveYear', () => {
     })
 
     it('should call commit with mutation SET_ACTIVE_YEAR and year', () => {
-      let calls = commitSpy.mock.calls
-      expect(calls.length).toBe(1)
-
-      let args = calls[0]
-      expect(args.length).toBe(2)
-
-      let mutation = args[0]
-      let data = args[1]
-      expect(mutation).toBe(MUTATIONS.SET_ACTIVE_YEAR)
-      expect(data).toEqual(payload)
+      expect(_context.commit).toHaveBeenCalledWith(MUTATIONS.SET_ACTIVE_YEAR, payload)
     })
   })
 
   describe('when NOT changing year', () => {
+    let _context
     beforeEach(async () => {
       payload = 2018
-      let _context = Object.assign({}, context, {
+
+      _context = Object.assign({}, context, {
         state: {
           activeYear: 2018,
           model: []
@@ -71,15 +58,17 @@ describe('setActiveYear', () => {
     })
 
     it('should NOT call commit with mutation SET_ACTIVE_YEAR', () => {
-      let calls = commitSpy.mock.calls
-      expect(calls.length).toBe(0)
+      expect(_context.commit).not.toHaveBeenCalled()
     })
   })
 
   describe('when state model contains entries for year', () => {
+    let _context
+
     beforeEach(async () => {
       payload = { year: 2018 }
-      let _context = Object.assign({}, context, {
+
+      _context = Object.assign({}, context, {
         state: {
           activeYear: 2018,
           model: [{
@@ -93,15 +82,16 @@ describe('setActiveYear', () => {
     })
 
     it('should NOT call dispatch with action GET_RATINGS', () => {
-      let calls = dispatchSpy.mock.calls
-      expect(calls.length).toBe(0)
+      expect(_context.dispatch).not.toHaveBeenCalled()
     })
   })
 
   describe('when state model NOT contains entries for year', () => {
+    let _context
+
     beforeEach(async () => {
       payload = { year: 2018 }
-      let _context = Object.assign({}, context, {
+      _context = Object.assign({}, context, {
         state: {
           activeYear: 2018,
           model: [{
@@ -115,16 +105,7 @@ describe('setActiveYear', () => {
     })
 
     it('should call dispatch with action GET_RATINGS and year', () => {
-      let calls = dispatchSpy.mock.calls
-      expect(calls.length).toBe(1)
-
-      let args = calls[0]
-      expect(args.length).toBe(2)
-
-      let action = args[0]
-      let data = args[1]
-      expect(action).toBe(ACTIONS.GET_RATINGS)
-      expect(data).toEqual(payload.year)
+      expect(context.dispatch).toHaveBeenCalledWith(ACTIONS.GET_RATINGS, payload.year)
     })
   })
 })

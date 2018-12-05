@@ -1,7 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div class="nav">
       <router-link to="/">Home</router-link>
+      <span>/</span>
+      <span v-if="vm.user.signedIn">
+       <router-link to="/logout">Signout</router-link>
+      </span>
+      <span v-else>
+        <router-link v-if="vm.user" to="/login">Signin</router-link>
+        <span>/</span>
+        <router-link v-if="vm.user" to="/register">Register</router-link>
+      </span>
     </div>
     <router-view class="component-content" />
     <Footer />
@@ -9,6 +18,7 @@
 </template>
 
 <script>
+import { ACTIONS } from '@/store/actions'
 import { MUTATIONS } from '@/store/mutations'
 import { breakpoints } from '@/media'
 import Footer from '@/modules/footer/Footer'
@@ -20,6 +30,7 @@ export default {
       window.addEventListener('resize', this.handleResize)
       window.addEventListener('scroll', this.handleScroll)
     })
+    this.$store.dispatch(ACTIONS.ACCOUNT_INIT)
   },
   created () {
     this.handleResize()
@@ -29,6 +40,9 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
   },
   computed: {
+    vm () {
+      return this
+    },
     orientation: {
       get () {
         return this.$store.state.orientation
@@ -44,6 +58,9 @@ export default {
       set (val) {
         this.$store.commit(MUTATIONS.SCROLL, val)
       }
+    },
+    user () {
+      return this.$store.state.account.user
     }
   },
   methods: {
@@ -77,14 +94,21 @@ body {
     color: #2c3e50;
     margin: 0px auto;
 
-    #nav {
+    .nav {
+      position: fixed;
       padding: 10px;
+      z-index: 10;
+
       a {
-        font-weight: bold;
-        color: #2c3e50;
+        color: #42b983;
         &.router-link-exact-active {
+          font-weight: bold;
           color: #42b983;
         }
+      }
+      span {
+        color: #fff;
+        margin: 0 2px;
       }
     }
 

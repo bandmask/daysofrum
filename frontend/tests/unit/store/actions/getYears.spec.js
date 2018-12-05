@@ -7,70 +7,69 @@ import getDataService from '@/logic/get/data'
 
 describe('getYears', () => {
   let context = {
-    commit: (type, payload) => { },
-    dispatch: (type, payload) => { }
+    commit: jest.fn(),
+    dispatch: jest.fn()
   }
-  let payload = 2018
 
-  let commitSpy
-  let dispatchSpy
+  let realDate
+  const date2017 = new Date(2017, 1, 1).getTime()
+  const date2019 = new Date(2019, 1, 1).getTime()
 
   beforeAll(() => {
-    commitSpy = jest.spyOn(context, 'commit')
-    dispatchSpy = jest.spyOn(context, 'dispatch')
-  })
-
-  beforeEach(async () => {
-    await action(context, payload)
+    realDate = global.Date
+    global.Date.now = jest.fn().mockImplementation(() => date2017)
   })
 
   afterEach(() => {
-    commitSpy.mockClear()
-    dispatchSpy.mockClear()
-
+    context.commit.mockClear()
+    context.dispatch.mockClear()
     getDataService.getYears.mockClear()
   })
 
   afterAll(() => {
     jest.clearAllMocks()
     jest.restoreAllMocks()
+
+    global.Date = realDate
   })
 
-  it('should call getDataService getYears', () => {
-    let calls = getDataService.getYears.mock.calls
-    expect(calls.length).toBe(1)
+  describe('when getting years', () => {
+    beforeEach(async () => {
+      await action(context)
+    })
 
-    let args = calls[0]
-    expect(args.length).toBe(0)
+    it('should call getDataService getYears', () => {
+      expect(getDataService.getYears).toHaveBeenCalledTimes(1)
+    })
+
+    it('should call commit with mutation SET_YEARS and data', () => {
+      expect(context.commit).toHaveBeenCalledWith(MUTATIONS.SET_YEARS, [{ year: 2018 }, { year: 2019 }, { year: 2020 }])
+    })
   })
 
-  it('should call commit with mutation SET_YEARS and data', () => {
-    let calls = commitSpy.mock.calls
-    expect(calls.length).toBe(1)
+  describe('when current year exists', () => {
+    beforeEach(async () => {
+      global.Date.now.mockImplementationOnce(() => date2019)
+      await action(context)
+    })
 
-    let args = calls[0]
-    expect(args.length).toBe(2)
-
-    let mutation = args[0]
-    let data = args[1]
-    expect(mutation).toBe(MUTATIONS.SET_YEARS)
-    expect(data).toEqual([{ year: 'first' }, { year: 'second' }])
+    it('should call dispatch with action SET_ACTIVE_YEAR and current year', () => {
+      expect(context.dispatch).toHaveBeenCalledWith(ACTIONS.SET_ACTIVE_YEAR, { year: 2019 })
+    })
   })
 
-  it('should call dispatch with action SET_ACTIVE_YEAR and first year', () => {
-    let calls = dispatchSpy.mock.calls
-    expect(calls.length).toBe(1)
+  describe('when current year NOT exists', () => {
+    beforeEach(async () => {
+      global.Date.now.mockImplementationOnce(() => date2017)
+      await action(context)
+    })
 
-    let args = calls[0]
-    expect(args.length).toBe(2)
-
-    let action = args[0]
-    let data = args[1]
-    expect(action).toBe(ACTIONS.SET_ACTIVE_YEAR)
-    expect(data).toEqual({ year: 'first' })
+    it('should call dispatch with action SET_ACTIVE_YEAR and max year', () => {
+      expect(context.dispatch).toHaveBeenCalledWith(ACTIONS.SET_ACTIVE_YEAR, { year: 2020 })
+    })
   })
 })
 
 jest.mock('@/logic/get/data', () => ({
-  getYears: jest.fn().mockImplementation(async () => { return Promise.resolve([{ year: 'first' }, { year: 'second' }]) })
+  getYears: jest.fn().mockImplementation(async () => { return Promise.resolve([{ year: 2019 }, { year: 2020 }, { year: 2018 }]) })
 }))

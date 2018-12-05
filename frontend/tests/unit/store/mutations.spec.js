@@ -4,6 +4,11 @@ import setData from '@/store/mutations/setData'
 import setYears from '@/store/mutations/setYears'
 import setRatings from '@/store/mutations/setRatings'
 import setActiveYear from '@/store/mutations/setActiveYear'
+import setAuthSettings from '@/store/mutations/setAuthSettings'
+import accountSetUserSignedIn from '@/store/mutations/accountSetUserSignedIn'
+import accountSetRegisterModel from '@/store/mutations/accountSetRegisterModel'
+import accountSetLoginModel from '@/store/mutations/accountSetLoginModel'
+import accountSetLoginResult from '@/store/mutations/accountSetLoginResult'
 
 import { default as mutations, MUTATIONS } from '@/store/mutations'
 
@@ -77,6 +82,61 @@ describe('mutations', () => {
       expect(mutations[MUTATIONS.SET_ACTIVE_YEAR]).toEqual(setActiveYear)
     })
   })
+
+  describe('setAuthSettings', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.SET_AUTH_SETTINGS).toBeDefined()
+      expect(MUTATIONS.SET_AUTH_SETTINGS).toEqual('m_setAuthSettings')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.SET_AUTH_SETTINGS]).toEqual(setAuthSettings)
+    })
+  })
+
+  describe('accountSetUserSignedIn', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.ACCOUNT_SET_USER_SIGNED_IN).toBeDefined()
+      expect(MUTATIONS.ACCOUNT_SET_USER_SIGNED_IN).toEqual('m_accountSetUserSignedIn')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.ACCOUNT_SET_USER_SIGNED_IN]).toEqual(accountSetUserSignedIn)
+    })
+  })
+
+  describe('accountSetRegisterModel', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.ACCOUNT_SET_REGISTER_MODEL).toBeDefined()
+      expect(MUTATIONS.ACCOUNT_SET_REGISTER_MODEL).toEqual('m_accountSetRegisterModel')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.ACCOUNT_SET_REGISTER_MODEL]).toEqual(accountSetRegisterModel)
+    })
+  })
+
+  describe('accountSetLoginModel', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.ACCOUNT_SET_LOGIN_MODEL).toBeDefined()
+      expect(MUTATIONS.ACCOUNT_SET_LOGIN_MODEL).toEqual('m_accountSetLoginModel')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.ACCOUNT_SET_LOGIN_MODEL]).toEqual(accountSetLoginModel)
+    })
+  })
+
+  describe('accountSetLoginResult', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.ACCOUNT_SET_LOGIN_RESULT).toBeDefined()
+      expect(MUTATIONS.ACCOUNT_SET_LOGIN_RESULT).toEqual('m_accountSetLoginResult')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.ACCOUNT_SET_LOGIN_RESULT]).toEqual(accountSetLoginResult)
+    })
+  })
 })
 
 jest.mock('@/store/mutations/orientation', () => jest.fn().mockImplementation(() => ({})))
@@ -85,3 +145,8 @@ jest.mock('@/store/mutations/setData', () => jest.fn().mockImplementation(() => 
 jest.mock('@/store/mutations/setYears', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/mutations/setRatings', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/mutations/setActiveYear', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/setAuthSettings', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/accountSetUserSignedIn', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/accountSetRegisterModel', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/accountSetLoginModel', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/accountSetLoginResult', () => jest.fn().mockImplementation(() => ({})))
