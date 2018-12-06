@@ -22,5 +22,9 @@ export default new Router({
     path: '/logout',
     name: 'logout',
     component: () => import('@/modules/account/Logout')
+  }, {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('@/modules/admin/Admin')
   }]
 })
