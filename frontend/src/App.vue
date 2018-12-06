@@ -4,7 +4,9 @@
       <router-link to="/">Home</router-link>
       <span>/</span>
       <span v-if="vm.user.signedIn">
-       <router-link to="/logout">Signout</router-link>
+        <router-link to="/admin">Admin</router-link>
+        <span>/</span>
+        <router-link to="/logout">Signout</router-link>
       </span>
       <span v-else>
         <router-link v-if="vm.user" to="/login">Signin</router-link>

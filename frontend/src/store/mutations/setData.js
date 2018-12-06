@@ -1,3 +1,3 @@
 export default (state, payload) => {
-  state.model = payload
+  state.ratings = payload
 }

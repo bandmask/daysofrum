@@ -20,7 +20,7 @@
       </div>
       <div v-if="vm.ratings.length > 0"
            class="rums">
-        <div v-for="(rating, $index) in vm.ratings"
+        <div v-for="(rating, $index) in vm.filteredRatings"
             :key="$index"
             class="rum">
           <div v-if="rating.image"
@@ -81,8 +81,8 @@ export default {
     scroll () {
       return this.$store.state.scroll
     },
-    model () {
-      return this.$store.state.model
+    ratings () {
+      return this.$store.state.ratings
     },
     years () {
       return this.$store.state.years
@@ -95,8 +95,8 @@ export default {
         this.$store.dispatch(ACTIONS.SET_ACTIVE_YEAR, value)
       }
     },
-    ratings () {
-      return this.model.filter(rating => rating.year === this.activeYear.year)
+    filteredRatings () {
+      return this.ratings.filter(rating => rating.year === this.activeYear.year)
     }
   },
   methods: {

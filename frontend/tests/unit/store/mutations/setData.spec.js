@@ -2,16 +2,16 @@ import mutation from '@/store/mutations/setData'
 
 describe('setData', () => {
   let state = {
-    model: [{ some: 'first model' }]
+    ratings: [{ some: 'first rating' }]
   }
 
-  let payload = [{ some: 'payload model' }]
+  let payload = [{ some: 'payload rating' }]
 
   beforeEach(() => {
     mutation(state, payload)
   })
 
-  it('should set state model to payload', () => {
-    expect(state.model).toBe(payload)
+  it('should set state ratings to payload', () => {
+    expect(state.ratings).toBe(payload)
   })
 })

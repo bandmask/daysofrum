@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     orientation: 'portrait',
     scroll: 0,
-    model: [],
+    ratings: [],
     years: [],
     activeYear: -1,
     authSettings: null,

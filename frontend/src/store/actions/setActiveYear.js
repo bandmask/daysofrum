@@ -6,7 +6,7 @@ export default (context, payload) => {
     context.commit(MUTATIONS.SET_ACTIVE_YEAR, payload)
   }
 
-  if (context.state.model.filter(rating => rating.year === payload.year).length === 0) {
+  if (context.state.ratings.filter(rating => rating.year === payload.year).length === 0) {
     context.dispatch(ACTIONS.GET_RATINGS, payload.year)
   }
 }

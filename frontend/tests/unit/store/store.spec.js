@@ -5,7 +5,7 @@ describe('store', () => {
     let expected = {
       orientation: 'portrait',
       scroll: 0,
-      model: [],
+      ratings: [],
       years: [],
       activeYear: -1,
       authSettings: null,

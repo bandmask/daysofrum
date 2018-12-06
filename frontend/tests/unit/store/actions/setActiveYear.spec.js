@@ -30,7 +30,7 @@ describe('setActiveYear', () => {
       _context = Object.assign({}, context, {
         state: {
           activeYear: 2017,
-          model: []
+          ratings: []
         }
       })
 
@@ -50,7 +50,7 @@ describe('setActiveYear', () => {
       _context = Object.assign({}, context, {
         state: {
           activeYear: 2018,
-          model: []
+          ratings: []
         }
       })
 
@@ -62,7 +62,7 @@ describe('setActiveYear', () => {
     })
   })
 
-  describe('when state model contains entries for year', () => {
+  describe('when state ratings contains entries for year', () => {
     let _context
 
     beforeEach(async () => {
@@ -71,9 +71,9 @@ describe('setActiveYear', () => {
       _context = Object.assign({}, context, {
         state: {
           activeYear: 2018,
-          model: [{
+          ratings: [{
             year: 2018,
-            some: 'model'
+            some: 'rating'
           }]
         }
       })
@@ -86,7 +86,7 @@ describe('setActiveYear', () => {
     })
   })
 
-  describe('when state model NOT contains entries for year', () => {
+  describe('when state ratings NOT contains entries for year', () => {
     let _context
 
     beforeEach(async () => {
@@ -94,9 +94,9 @@ describe('setActiveYear', () => {
       _context = Object.assign({}, context, {
         state: {
           activeYear: 2018,
-          model: [{
+          ratings: [{
             year: 2017,
-            some: 'model'
+            some: 'rating'
           }]
         }
       })

@@ -1,3 +1,3 @@
 export default (state, payload) => {
-  state.model = state.model.filter(rating => rating.year !== payload.year).concat(payload.ratings)
+  state.ratings = state.ratings.filter(rating => rating.year !== payload.year).concat(payload.ratings)
 }
