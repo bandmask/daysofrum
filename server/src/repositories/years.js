@@ -12,7 +12,13 @@ const insertOrUpdate = (yearModel) => {
   return db.collection(collection).findOneAndUpdate({ year: yearModel.year }, { $set: { description: yearModel.description } }, { upsert: true })
 }
 
+const deleteOne = year => {
+  let db = dbUtil.getDb()
+  return db.collection(collection).deleteOne({ year: year })
+}
+
 export default {
   getAll: getAll,
-  insertOrUpdate, insertOrUpdate
+  insertOrUpdate, insertOrUpdate,
+  deleteOne: deleteOne
 }

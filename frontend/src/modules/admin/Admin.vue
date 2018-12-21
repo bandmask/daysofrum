@@ -1,7 +1,7 @@
 <template>
   <div class="admin">
     <h1>Administrate</h1>
-    <Years />
+    <component :is="vm.activeComponent" />
   </div>
 </template>
 
@@ -19,7 +19,6 @@ export default {
   },
   watch: {
     years (newVal, oldVal) {
-      console.log('watch years', newVal, oldVal)
       this.years.forEach(year => {
         if (!this.ratings.find(rating => rating.year === year.year)) {
           this.$store.dispatch(ACTIONS.GET_RATINGS, year.year)
@@ -28,11 +27,17 @@ export default {
     }
   },
   computed: {
+    vm () {
+      return this
+    },
     years () {
       return this.$store.state.years
     },
     ratings () {
       return this.$store.state.ratings
+    },
+    activeComponent () {
+      return Years
     }
   }
 }

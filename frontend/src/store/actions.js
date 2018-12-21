@@ -9,6 +9,8 @@ import accountRegisterReset from '@/store/actions/accountRegisterReset'
 import accountLogin from '@/store/actions/accountLogin'
 import accountLogout from '@/store/actions/accountLogout'
 import accountLoginReset from '@/store/actions/accountLoginReset'
+import administrateAddYear from '@/store/actions/administrateAddYear'
+import administrateRemoveYear from '@/store/actions/administrateRemoveYear'
 
 export const ACTIONS = {
   GET_YEARS: 'a_getYears',
@@ -21,7 +23,9 @@ export const ACTIONS = {
   ACCOUNT_REGISTER_RESET: 'a_accountRegisterReset',
   ACCOUNT_LOGIN: 'a_accountLogin',
   ACCOUNT_LOGOUT: 'a_accountLogout',
-  ACCOUNT_LOGIN_RESET: 'a_accountLoginReset'
+  ACCOUNT_LOGIN_RESET: 'a_accountLoginReset',
+  ADMINISTRATE_ADD_YEAR: 'a_administrateAddYear',
+  ADMINISTRATE_REMOVE_YEAR: 'a_administrateRemoveYear'
 }
 
 export default {
@@ -35,5 +39,7 @@ export default {
   [ACTIONS.ACCOUNT_REGISTER_RESET]: accountRegisterReset,
   [ACTIONS.ACCOUNT_LOGIN]: accountLogin,
   [ACTIONS.ACCOUNT_LOGOUT]: accountLogout,
-  [ACTIONS.ACCOUNT_LOGIN_RESET]: accountLoginReset
+  [ACTIONS.ACCOUNT_LOGIN_RESET]: accountLoginReset,
+  [ACTIONS.ADMINISTRATE_ADD_YEAR]: administrateAddYear,
+  [ACTIONS.ADMINISTRATE_REMOVE_YEAR]: administrateRemoveYear
 }

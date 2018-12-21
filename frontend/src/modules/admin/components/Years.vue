@@ -31,6 +31,8 @@
 import Ratings from './Ratings'
 import AddYear from './AddYear'
 
+import { ACTIONS } from '@/store/actions'
+
 export default {
   components: { Ratings, AddYear },
   data () {
@@ -64,7 +66,7 @@ export default {
       return !!this.editRatingsForYears.find(year => year === yearModel.year)
     },
     removeYear (year) {
-
+      this.$store.dispatch(ACTIONS.ADMINISTRATE_REMOVE_YEAR, year.year)
     }
   }
 }

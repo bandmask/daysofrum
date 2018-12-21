@@ -9,6 +9,9 @@ import accountSetUserSignedIn from '@/store/mutations/accountSetUserSignedIn'
 import accountSetRegisterModel from '@/store/mutations/accountSetRegisterModel'
 import accountSetLoginModel from '@/store/mutations/accountSetLoginModel'
 import accountSetLoginResult from '@/store/mutations/accountSetLoginResult'
+import administrateAddYear from '@/store/mutations/administrateAddYear'
+import administrateRemoveYear from '@/store/mutations/administrateRemoveYear'
+import administrateError from '@/store/mutations/administrateError'
 
 import { default as mutations, MUTATIONS } from '@/store/mutations'
 
@@ -137,6 +140,39 @@ describe('mutations', () => {
       expect(mutations[MUTATIONS.ACCOUNT_SET_LOGIN_RESULT]).toEqual(accountSetLoginResult)
     })
   })
+
+  describe('administrateAddYear', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.ADMINISTRATE_ADD_YEAR).toBeDefined()
+      expect(MUTATIONS.ADMINISTRATE_ADD_YEAR).toEqual('m_administrateAddYear')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.ADMINISTRATE_ADD_YEAR]).toEqual(administrateAddYear)
+    })
+  })
+
+  describe('administrateRemoveYear', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.ADMINISTRATE_REMOVE_YEAR).toBeDefined()
+      expect(MUTATIONS.ADMINISTRATE_REMOVE_YEAR).toEqual('m_administrateRemoveYear')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.ADMINISTRATE_REMOVE_YEAR]).toEqual(administrateRemoveYear)
+    })
+  })
+
+  describe('administrateError', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.ADMINISTRATE_ERROR).toBeDefined()
+      expect(MUTATIONS.ADMINISTRATE_ERROR).toEqual('m_administrateError')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.ADMINISTRATE_ERROR]).toEqual(administrateError)
+    })
+  })
 })
 
 jest.mock('@/store/mutations/orientation', () => jest.fn().mockImplementation(() => ({})))
@@ -150,3 +186,6 @@ jest.mock('@/store/mutations/accountSetUserSignedIn', () => jest.fn().mockImplem
 jest.mock('@/store/mutations/accountSetRegisterModel', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/mutations/accountSetLoginModel', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/mutations/accountSetLoginResult', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/administrateAddYear', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/administrateRemoveYear', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/administrateError', () => jest.fn().mockImplementation(() => ({})))

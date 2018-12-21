@@ -20,6 +20,7 @@
 
 <script>
 import { ACTIONS } from '@/store/actions'
+
 export default {
   data () {
     return {

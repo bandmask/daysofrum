@@ -9,6 +9,8 @@ import accountRegisterReset from '@/store/actions/accountRegisterReset'
 import accountLogin from '@/store/actions/accountLogin'
 import accountLogout from '@/store/actions/accountLogout'
 import accountLoginReset from '@/store/actions/accountLoginReset'
+import administrateAddYear from '@/store/actions/administrateAddYear'
+import administrateRemoveYear from '@/store/actions/administrateRemoveYear'
 
 import { default as actions, ACTIONS } from '@/store/actions'
 
@@ -137,6 +139,28 @@ describe('actions', () => {
       expect(actions[ACTIONS.ACCOUNT_LOGIN_RESET]).toEqual(accountLoginReset)
     })
   })
+
+  describe('administrateAddYear', () => {
+    it('should be defined by action string', () => {
+      expect(ACTIONS.ADMINISTRATE_ADD_YEAR).toBeDefined()
+      expect(ACTIONS.ADMINISTRATE_ADD_YEAR).toEqual('a_administrateAddYear')
+    })
+
+    it('should be a resolvable action', () => {
+      expect(actions[ACTIONS.ADMINISTRATE_ADD_YEAR]).toEqual(administrateAddYear)
+    })
+  })
+
+  describe('administrateRemoveYear', () => {
+    it('should be defined by action string', () => {
+      expect(ACTIONS.ADMINISTRATE_REMOVE_YEAR).toBeDefined()
+      expect(ACTIONS.ADMINISTRATE_REMOVE_YEAR).toEqual('a_administrateRemoveYear')
+    })
+
+    it('should be a resolvable action', () => {
+      expect(actions[ACTIONS.ADMINISTRATE_REMOVE_YEAR]).toEqual(administrateRemoveYear)
+    })
+  })
 })
 
 jest.mock('@/store/actions/getYears', () => jest.fn().mockImplementation(() => ({})))
@@ -150,3 +174,5 @@ jest.mock('@/store/actions/accountRegisterReset', () => jest.fn().mockImplementa
 jest.mock('@/store/actions/accountLogin', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/actions/accountLogout', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/actions/accountLoginReset', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/actions/administrateAddYear', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/actions/administrateRemoveYear', () => jest.fn().mockImplementation(() => ({})))

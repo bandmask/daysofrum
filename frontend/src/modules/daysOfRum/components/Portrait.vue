@@ -3,7 +3,7 @@
     <div class="header" :style="{ backgroundImage: `url(${vm.bannerImageSrc}`}">
       <h1>24 Days Of Rum</h1>
       <div class="year-filter">
-        <div v-for="(year, $index) in years"
+        <div v-for="(year, $index) in vm.years"
              :key="$index"
               @click="vm.setActiveYear(year)"
              :class="{'active': vm.activeYear.year === year.year}"

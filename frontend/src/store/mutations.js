@@ -9,6 +9,9 @@ import accountSetUserSignedIn from '@/store/mutations/accountSetUserSignedIn'
 import accountSetRegisterModel from '@/store/mutations/accountSetRegisterModel'
 import accountSetLoginModel from '@/store/mutations/accountSetLoginModel'
 import accountSetLoginResult from '@/store/mutations/accountSetLoginResult'
+import administrateAddYear from '@/store/mutations/administrateAddYear'
+import administrateRemoveYear from '@/store/mutations/administrateRemoveYear'
+import administrateError from '@/store/mutations/administrateError'
 
 export const MUTATIONS = {
   ORIENTATION: 'm_orientation',
@@ -21,7 +24,10 @@ export const MUTATIONS = {
   ACCOUNT_SET_USER_SIGNED_IN: 'm_accountSetUserSignedIn',
   ACCOUNT_SET_REGISTER_MODEL: 'm_accountSetRegisterModel',
   ACCOUNT_SET_LOGIN_MODEL: 'm_accountSetLoginModel',
-  ACCOUNT_SET_LOGIN_RESULT: 'm_accountSetLoginResult'
+  ACCOUNT_SET_LOGIN_RESULT: 'm_accountSetLoginResult',
+  ADMINISTRATE_ADD_YEAR: 'm_administrateAddYear',
+  ADMINISTRATE_REMOVE_YEAR: 'm_administrateRemoveYear',
+  ADMINISTRATE_ERROR: 'm_administrateError'
 }
 
 export default {
@@ -35,5 +41,8 @@ export default {
   [MUTATIONS.ACCOUNT_SET_USER_SIGNED_IN]: accountSetUserSignedIn,
   [MUTATIONS.ACCOUNT_SET_REGISTER_MODEL]: accountSetRegisterModel,
   [MUTATIONS.ACCOUNT_SET_LOGIN_MODEL]: accountSetLoginModel,
-  [MUTATIONS.ACCOUNT_SET_LOGIN_RESULT]: accountSetLoginResult
+  [MUTATIONS.ACCOUNT_SET_LOGIN_RESULT]: accountSetLoginResult,
+  [MUTATIONS.ADMINISTRATE_ADD_YEAR]: administrateAddYear,
+  [MUTATIONS.ADMINISTRATE_REMOVE_YEAR]: administrateRemoveYear,
+  [MUTATIONS.ADMINISTRATE_ERROR]: administrateError
 }

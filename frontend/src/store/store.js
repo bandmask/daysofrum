@@ -26,7 +26,8 @@ export default new Vuex.Store({
           hasResult: false
         }
       }
-    }
+    },
+    administrationError: null
   },
   mutations,
   actions,

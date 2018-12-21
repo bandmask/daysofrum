@@ -17,7 +17,8 @@ describe('store', () => {
         register: {
           result: { hasResult: false }
         }
-      }
+      },
+      administrationError: null
     }
 
     expect(store.state).toEqual(expected)

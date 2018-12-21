@@ -1,5 +1,5 @@
 const validate = year => {
-  return year.year && year.description
+  return year.year && !isNaN(year.year) && year.description
 }
 
 export default {
