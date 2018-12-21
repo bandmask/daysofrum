@@ -1,18 +1,30 @@
 <template>
   <div>
-    <h1>Add year</h1>
-    <div class="add-year">
+    <h1>Add rating</h1>
+    <div class="add-rating">
       <label>
-        <span>Year:</span>
-        <input type="number" v-model="vm.year" />
+        <span>Day:</span>
+        <input type="number" v-model="vm.ratingModel.day" />
       </label>
       <label>
-        <span>Description:</span>
-        <textarea v-model="vm.description" />
+        <span>Name:</span>
+        <input type="text" v-model="vm.ratingModel.name" />
+      </label>
+      <label>
+        <span>Rating</span>
+        <input type="number" v-model="vm.ratingModel.rating" />
+      </label>
+      <label>
+        <span>Note</span>
+        <textarea v-model="vm.ratingModel.note" />
+      </label>
+      <label>
+        <span>Image</span>
+        <input type="file" @change="vm.handleImage" />
       </label>
     </div>
     <div class="buttons">
-      <button @click="vm.addYear()" class="save">Save</button>
+      <button @click="vm.addRating()" class="save">Save</button>
       <button @click="vm.cancel()" class="cancel">Cancel</button>
     </div>
   </div>
@@ -24,8 +36,7 @@ import { ACTIONS } from '@/store/actions'
 export default {
   data () {
     return {
-      year: null,
-      description: null
+      ratingModel: {}
     }
   },
   computed: {
@@ -34,19 +45,21 @@ export default {
     }
   },
   methods: {
-    addYear () {
-      this.$store.dispatch(ACTIONS.ADMINISTRATE_ADD_YEAR, { year: this.year, description: this.description })
+    handleImage (event) {
+      this.image = event.target.files[0]
+    },
+    addRating () {
+      this.$store.dispatch(ACTIONS.ADMINISTRATE_ADD_RATING, this.ratingModel)
     },
     cancel () {
-      this.year = null
-      this.description = null
+      this.ratingModel = {}
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-.add-year {
+.add-rating {
   width: 350px;
   label {
     display: flex;
