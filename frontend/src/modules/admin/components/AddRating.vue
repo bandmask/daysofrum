@@ -34,9 +34,11 @@
 import { ACTIONS } from '@/store/actions'
 
 export default {
+  props: ['year'],
   data () {
     return {
-      ratingModel: {}
+      ratingModel: {},
+      image: null
     }
   },
   computed: {
@@ -49,7 +51,7 @@ export default {
       this.image = event.target.files[0]
     },
     addRating () {
-      this.$store.dispatch(ACTIONS.ADMINISTRATE_ADD_RATING, this.ratingModel)
+      this.$store.dispatch(ACTIONS.ADMINISTRATE_ADD_RATING, { year: this.year, rating: this.ratingModel, image: this.image })
     },
     cancel () {
       this.ratingModel = {}

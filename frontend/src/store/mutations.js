@@ -11,6 +11,8 @@ import accountSetLoginModel from '@/store/mutations/accountSetLoginModel'
 import accountSetLoginResult from '@/store/mutations/accountSetLoginResult'
 import administrateAddYear from '@/store/mutations/administrateAddYear'
 import administrateRemoveYear from '@/store/mutations/administrateRemoveYear'
+import administrateAddRating from '@/store/mutations/administrateAddRating'
+import administrateRemoveRating from '@/store/mutations/administrateRemoveRating'
 import administrateError from '@/store/mutations/administrateError'
 
 export const MUTATIONS = {
@@ -27,6 +29,8 @@ export const MUTATIONS = {
   ACCOUNT_SET_LOGIN_RESULT: 'm_accountSetLoginResult',
   ADMINISTRATE_ADD_YEAR: 'm_administrateAddYear',
   ADMINISTRATE_REMOVE_YEAR: 'm_administrateRemoveYear',
+  ADMINISTRATE_ADD_RATING: 'm_administrateAddRating',
+  ADMINISTRATE_REMOVE_RATING: 'm_administrateRemoveRating',
   ADMINISTRATE_ERROR: 'm_administrateError'
 }
 
@@ -44,5 +48,7 @@ export default {
   [MUTATIONS.ACCOUNT_SET_LOGIN_RESULT]: accountSetLoginResult,
   [MUTATIONS.ADMINISTRATE_ADD_YEAR]: administrateAddYear,
   [MUTATIONS.ADMINISTRATE_REMOVE_YEAR]: administrateRemoveYear,
+  [MUTATIONS.ADMINISTRATE_ADD_RATING]: administrateAddRating,
+  [MUTATIONS.ADMINISTRATE_REMOVE_RATING]: administrateRemoveRating,
   [MUTATIONS.ADMINISTRATE_ERROR]: administrateError
 }

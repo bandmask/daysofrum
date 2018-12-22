@@ -48,7 +48,7 @@ router.get('/:year/:day', async (req, res) => {
 })
 
 router.post('/', jwtMiddleWare, async (req, res) => {
-  let ratingModel = req.body
+  let ratingModel = convert(req.body)
 
   if (ratingValidator.validate(ratingModel)) {
     try {
@@ -61,6 +61,28 @@ router.post('/', jwtMiddleWare, async (req, res) => {
     res.json({ success: false, message: 'incorrect model' })
   }
 })
+
+router.delete('/:year/:day', jwtMiddleWare, async (req, res) => {
+  let year = parseInt(req.params.year)
+  let day = req.params.day
+
+  try {
+    await ratingsRepository.deleteOne(year, day)
+    res.json({ success: true })
+  } catch (exception) {
+    res.json({ success: false, message: exception })
+  }
+})
+
+const convert = fromBody => {
+  return {
+    year: parseInt(fromBody.year),
+    day: parseInt(fromBody.day),
+    rating: parseFloat(fromBody.rating),
+    name: fromBody.name,
+    note: fromBody.note
+  }
+}
 
 const toModel = async result => {
   return {

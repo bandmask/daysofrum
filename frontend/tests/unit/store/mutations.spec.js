@@ -11,6 +11,8 @@ import accountSetLoginModel from '@/store/mutations/accountSetLoginModel'
 import accountSetLoginResult from '@/store/mutations/accountSetLoginResult'
 import administrateAddYear from '@/store/mutations/administrateAddYear'
 import administrateRemoveYear from '@/store/mutations/administrateRemoveYear'
+import administrateAddRating from '@/store/mutations/administrateAddRating'
+import administrateRemoveRating from '@/store/mutations/administrateRemoveRating'
 import administrateError from '@/store/mutations/administrateError'
 
 import { default as mutations, MUTATIONS } from '@/store/mutations'
@@ -163,6 +165,28 @@ describe('mutations', () => {
     })
   })
 
+  describe('administrateAddRating', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.ADMINISTRATE_ADD_RATING).toBeDefined()
+      expect(MUTATIONS.ADMINISTRATE_ADD_RATING).toEqual('m_administrateAddRating')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.ADMINISTRATE_ADD_RATING]).toEqual(administrateAddRating)
+    })
+  })
+
+  describe('administrateRemoveRating', () => {
+    it('should be defined by mutation string', () => {
+      expect(MUTATIONS.ADMINISTRATE_REMOVE_RATING).toBeDefined()
+      expect(MUTATIONS.ADMINISTRATE_REMOVE_RATING).toEqual('m_administrateRemoveRating')
+    })
+
+    it('should be a resolvable mutation', () => {
+      expect(mutations[MUTATIONS.ADMINISTRATE_REMOVE_RATING]).toEqual(administrateRemoveRating)
+    })
+  })
+
   describe('administrateError', () => {
     it('should be defined by mutation string', () => {
       expect(MUTATIONS.ADMINISTRATE_ERROR).toBeDefined()
@@ -188,4 +212,6 @@ jest.mock('@/store/mutations/accountSetLoginModel', () => jest.fn().mockImplemen
 jest.mock('@/store/mutations/accountSetLoginResult', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/mutations/administrateAddYear', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/mutations/administrateRemoveYear', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/administrateAddRating', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/mutations/administrateRemoveRating', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/mutations/administrateError', () => jest.fn().mockImplementation(() => ({})))

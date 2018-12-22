@@ -18,12 +18,15 @@ router.post('/:year/:day', jwtMiddleWare, fileUpload, async (req, res) => {
   if (ratingValidator.validateYearAndDay(year, day)) {
     let rumImage = req.file
     let imageResult = await handleBuffer(rumImage.buffer)
+
     if (imageResult.success) {
       try {
         let rating = await ratingsRepository.getByYearAndDay(year, day)
         let insertResult = await imageRepository.insertOrUpdate(rating._id, imageResult.result)
+
         res.json({ statusCode: 200, result: insertResult })
       } catch (exception) {
+        console.log('catch', exception)
         res.json({ success: 400, message: exception })
       }
     } else {

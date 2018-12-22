@@ -11,6 +11,8 @@ import accountLogout from '@/store/actions/accountLogout'
 import accountLoginReset from '@/store/actions/accountLoginReset'
 import administrateAddYear from '@/store/actions/administrateAddYear'
 import administrateRemoveYear from '@/store/actions/administrateRemoveYear'
+import administrateAddRating from '@/store/actions/administrateAddRating'
+import administrateRemoveRating from '@/store/actions/administrateRemoveRating'
 
 export const ACTIONS = {
   GET_YEARS: 'a_getYears',
@@ -25,7 +27,9 @@ export const ACTIONS = {
   ACCOUNT_LOGOUT: 'a_accountLogout',
   ACCOUNT_LOGIN_RESET: 'a_accountLoginReset',
   ADMINISTRATE_ADD_YEAR: 'a_administrateAddYear',
-  ADMINISTRATE_REMOVE_YEAR: 'a_administrateRemoveYear'
+  ADMINISTRATE_REMOVE_YEAR: 'a_administrateRemoveYear',
+  ADMINISTRATE_ADD_RATING: 'a_administrateAddRating',
+  ADMINISTRATE_REMOVE_RATING: 'a_administrateRemoveRating'
 }
 
 export default {
@@ -41,5 +45,7 @@ export default {
   [ACTIONS.ACCOUNT_LOGOUT]: accountLogout,
   [ACTIONS.ACCOUNT_LOGIN_RESET]: accountLoginReset,
   [ACTIONS.ADMINISTRATE_ADD_YEAR]: administrateAddYear,
-  [ACTIONS.ADMINISTRATE_REMOVE_YEAR]: administrateRemoveYear
+  [ACTIONS.ADMINISTRATE_REMOVE_YEAR]: administrateRemoveYear,
+  [ACTIONS.ADMINISTRATE_ADD_RATING]: administrateAddRating,
+  [ACTIONS.ADMINISTRATE_REMOVE_RATING]: administrateRemoveRating
 }

@@ -1,5 +1,5 @@
-// const apiUri = 'https://daysofrum.ropr.se/api'
-const apiUri = 'http://localhost:49260/api'
+// const apiUri = 'http://localhost:49260/api'
+const apiUri = 'https://daysofrum.ropr.se/api'
 
 const getData = () => {
   let uri = `${apiUri}/data`

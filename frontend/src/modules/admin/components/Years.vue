@@ -19,7 +19,7 @@
           <button @click="vm.removeYear(yearModel)" class="delete">Delete</button>
         </div>
         <keep-alive>
-          <Ratings v-show="isEditingRatingsForYear(yearModel)" :ratings="vm.getRatings(yearModel)" />
+          <Ratings v-show="isEditingRatingsForYear(yearModel)" :year="yearModel.year" :ratings="vm.getRatings(yearModel)" />
         </keep-alive>
       </div>
     </div>
@@ -66,7 +66,9 @@ export default {
       return !!this.editRatingsForYears.find(year => year === yearModel.year)
     },
     removeYear (year) {
-      this.$store.dispatch(ACTIONS.ADMINISTRATE_REMOVE_YEAR, year.year)
+      if (confirm(`Sure you want to delete year ${year.year}?`)) {
+        this.$store.dispatch(ACTIONS.ADMINISTRATE_REMOVE_YEAR, year.year)
+      }
     }
   }
 }

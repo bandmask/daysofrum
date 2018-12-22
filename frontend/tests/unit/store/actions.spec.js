@@ -11,6 +11,8 @@ import accountLogout from '@/store/actions/accountLogout'
 import accountLoginReset from '@/store/actions/accountLoginReset'
 import administrateAddYear from '@/store/actions/administrateAddYear'
 import administrateRemoveYear from '@/store/actions/administrateRemoveYear'
+import administrateAddRating from '@/store/actions/administrateAddRating'
+import administrateRemoveRating from '@/store/actions/administrateRemoveRating'
 
 import { default as actions, ACTIONS } from '@/store/actions'
 
@@ -161,6 +163,28 @@ describe('actions', () => {
       expect(actions[ACTIONS.ADMINISTRATE_REMOVE_YEAR]).toEqual(administrateRemoveYear)
     })
   })
+
+  describe('administrateAddRating', () => {
+    it('should be defined by action string', () => {
+      expect(ACTIONS.ADMINISTRATE_ADD_RATING).toBeDefined()
+      expect(ACTIONS.ADMINISTRATE_ADD_RATING).toEqual('a_administrateAddRating')
+    })
+
+    it('should be a resolvable action', () => {
+      expect(actions[ACTIONS.ADMINISTRATE_ADD_RATING]).toEqual(administrateAddRating)
+    })
+  })
+
+  describe('administrateRemoveRating', () => {
+    it('should be defined by action string', () => {
+      expect(ACTIONS.ADMINISTRATE_REMOVE_RATING).toBeDefined()
+      expect(ACTIONS.ADMINISTRATE_REMOVE_RATING).toEqual('a_administrateRemoveRating')
+    })
+
+    it('should be a resolvable action', () => {
+      expect(actions[ACTIONS.ADMINISTRATE_REMOVE_RATING]).toEqual(administrateRemoveRating)
+    })
+  })
 })
 
 jest.mock('@/store/actions/getYears', () => jest.fn().mockImplementation(() => ({})))
@@ -176,3 +200,5 @@ jest.mock('@/store/actions/accountLogout', () => jest.fn().mockImplementation(()
 jest.mock('@/store/actions/accountLoginReset', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/actions/administrateAddYear', () => jest.fn().mockImplementation(() => ({})))
 jest.mock('@/store/actions/administrateRemoveYear', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/actions/administrateAddRating', () => jest.fn().mockImplementation(() => ({})))
+jest.mock('@/store/actions/administrateRemoveRating', () => jest.fn().mockImplementation(() => ({})))

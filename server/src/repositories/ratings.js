@@ -17,7 +17,7 @@ const getByYearAndDay = (year, day) => {
   return db.collection('ratings').findOne({ year: year, day: day })
 }
 
-const insertOrUpdate = (ratingsModel) => {
+const insertOrUpdate = ratingsModel => {
   let db = dbUtil.getDb()
   return db.collection(collection).findOneAndUpdate({ year: ratingsModel.year, day: ratingsModel.day },
     {
@@ -31,9 +31,15 @@ const insertOrUpdate = (ratingsModel) => {
     }, { upsert: true })
 }
 
+const deleteOne = (year, day) => {
+  let db = dbUtil.getDb()
+  return db.collection(collection).deleteOne({ year: year, day: day })
+}
+
 export default {
   getAll: getAll,
   getByYear: getByYear,
   getByYearAndDay: getByYearAndDay,
-  insertOrUpdate: insertOrUpdate
+  insertOrUpdate: insertOrUpdate,
+  deleteOne: deleteOne
 }
