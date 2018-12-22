@@ -79,8 +79,10 @@ const convert = fromBody => {
     year: parseInt(fromBody.year),
     day: parseInt(fromBody.day),
     rating: parseFloat(fromBody.rating),
+    percentage: parseFloat(fromBody.percentage),
     name: fromBody.name,
-    note: fromBody.note
+    note: fromBody.note,
+    origin: fromBody.origin,
   }
 }
 
@@ -89,6 +91,8 @@ const toModel = async result => {
     year: result.year,
     day: result.day,
     name: result.name,
+    origin: result.origin,
+    percentage: result.percentage,
     rating: result.rating,
     note: result.note,
     image: await getImage(result._id)

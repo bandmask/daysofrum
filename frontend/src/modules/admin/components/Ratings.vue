@@ -15,6 +15,14 @@
           <span>{{rating.rating}}</span>
         </label>
         <label>
+          <span>Origin:</span>
+          <span>{{rating.origin}}</span>
+        </label>
+        <label>
+          <span>%:</span>
+          <span>{{rating.percentage}}</span>
+        </label>
+        <label>
           <span>Note: </span>
           <span>{{rating.note}}</span>
         </label>

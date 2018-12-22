@@ -11,15 +11,23 @@
         <input type="text" v-model="vm.ratingModel.name" />
       </label>
       <label>
-        <span>Rating</span>
+        <span>Origin:</span>
+        <input type="text" v-model="vm.ratingModel.origin" />
+      </label>
+      <label>
+        <span>Percentage</span>
+        <input type="number" v-model="vm.ratingModel.percentage" />
+      </label>
+      <label>
+        <span>Rating:</span>
         <input type="number" v-model="vm.ratingModel.rating" />
       </label>
       <label>
-        <span>Note</span>
+        <span>Note:</span>
         <textarea v-model="vm.ratingModel.note" />
       </label>
       <label>
-        <span>Image</span>
+        <span>Image:</span>
         <input type="file" @change="vm.handleImage" />
       </label>
     </div>

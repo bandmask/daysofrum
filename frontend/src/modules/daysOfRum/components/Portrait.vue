@@ -38,10 +38,18 @@
               <span>{{rating.name}}</span>
             </label>
             <label>
+              Origin:
+              <span>{{rating.origin}}</span>
+            </label>
+            <label>
+              %:
+              <span>{{rating.percentage}}</span>
+            </label>
+            <label>
               Rating:
               <span>{{rating.rating}}</span>
             </label>
-            <label>
+            <label class="note">
               Note:
               <span>{{rating.note}}</span>
             </label>
@@ -63,7 +71,7 @@
 <script>
 import { ACTIONS } from '@/store/actions'
 
-import portraitBanner from '@/assets/portrait_banner_2.jpg'
+import portraitBanner from '@/assets/portrait_banner.png'
 
 export default {
   data () {
@@ -193,6 +201,10 @@ export default {
             span {
               font-weight: 600;
               font-style: normal;
+            }
+
+            &.note {
+              max-width: 800px;
             }
           }
         }
